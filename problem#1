@@ -1,0 +1,166 @@
+{
+ "metadata": {
+  "celltoolbar": "Raw Cell Format",
+  "name": "",
+  "signature": "sha256:1ed5c6e2af5c91e66e33916d2989a0b7f28ef587f9758cb4abf36d0001720abd"
+ },
+ "nbformat": 3,
+ "nbformat_minor": 0,
+ "worksheets": [
+  {
+   "cells": [
+    {
+     "cell_type": "heading",
+     "level": 1,
+     "metadata": {},
+     "source": [
+      "Project Euler 1 Python\n"
+     ]
+    },
+    {
+     "cell_type": "markdown",
+     "metadata": {},
+     "source": [
+      "Problem: If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000."
+     ]
+    },
+    {
+     "cell_type": "code",
+     "collapsed": false,
+     "input": [
+      "import time"
+     ],
+     "language": "python",
+     "metadata": {},
+     "outputs": []
+    },
+    {
+     "cell_type": "code",
+     "collapsed": false,
+     "input": [
+      "start = time.time()\n",
+      "t = []\n",
+      "s = sum([i for i in range(1000) if (i % 3 == 0 or i % 5 == 0) ])\n",
+      "elapsed = time.time() - start\n",
+      "\n",
+      "print \"result %s returned in %s seconds\" % (s,elapsed) "
+     ],
+     "language": "python",
+     "metadata": {},
+     "outputs": [
+      {
+       "output_type": "stream",
+       "stream": "stdout",
+       "text": [
+        "result 233168 returned in 0.00121021270752 seconds\n"
+       ]
+      }
+     ],
+     "prompt_number": 88
+    },
+    {
+     "cell_type": "code",
+     "collapsed": false,
+     "input": [
+      "def _3or5v2(x):\n",
+      "    start = time.time()\n",
+      "    newList = []\n",
+      "    for i in xrange(x): \n",
+      "        if i % 3 == 0 or i % 5 == 0:\n",
+      "            newList.append(i)\n",
+      "    elapsed = time.time() - start\n",
+      "    return sum(newList), elapsed"
+     ],
+     "language": "python",
+     "metadata": {},
+     "outputs": [],
+     "prompt_number": 87
+    },
+    {
+     "cell_type": "code",
+     "collapsed": false,
+     "input": [
+      "def _3or5v1(x):\n",
+      "    start = time.time()\n",
+      "    newList = [i for i in xrange(x) if i % 3 == 0 or i % 5 == 0]\n",
+      "    elapsed = time.time() - start\n",
+      "    return sum(newList), elapsed"
+     ],
+     "language": "python",
+     "metadata": {},
+     "outputs": [],
+     "prompt_number": 82
+    },
+    {
+     "cell_type": "code",
+     "collapsed": false,
+     "input": [
+      "print \"result %s returned in %s seconds\" %_3or5v1(1000)\n",
+      "print \"result %s returned in %s seconds\" %_3or5v2(1000)"
+     ],
+     "language": "python",
+     "metadata": {},
+     "outputs": [
+      {
+       "output_type": "stream",
+       "stream": "stdout",
+       "text": [
+        "result 233168 returned in 0.000786066055298 seconds\n",
+        "result 233168 returned in 0.000427961349487 seconds\n"
+       ]
+      }
+     ],
+     "prompt_number": 81
+    },
+    {
+     "cell_type": "code",
+     "collapsed": false,
+     "input": [
+      "# The sum of all numbers from 1 to n is (n*(n+1))/2. Using this formula, we can\n",
+      "# find the answer in the following way.\n",
+      "\n",
+      "# Notice that all of the multiples of 3 look like this:\n",
+      "#   3 + 6 + 9 + ... + 996 + 999 = 3 * (1 + 2 + ... + 333) = 3 * (333*334)/2\n",
+      "\n",
+      "# Similarly, the sum of all multiples of 5 looks like this:\n",
+      "#   5 + 10 + 15 + ... + 995 = 5 * (1 + 2 + ... + 199) = 5 * (199*200)/2\n",
+      "\n",
+      "# If we were to add these two integers together, we would be counting multiples\n",
+      "# of 15 twice (once as multiples of 3 and once as multiples of 5). So, we take\n",
+      "# the two numbers above and subtract an instance of all multiples of 15:\n",
+      "#   15 + 30 + ... + 990 = 15 * (1 + 2 + ... + 66) = 15 * (66*67)/2\n",
+      "\n",
+      "start = time.time()\n",
+      "\n",
+      "s = ((3*333*334)/2) + ((5*199*200)/2) - ((15*66*67)/2)\n",
+      "    \n",
+      "elapsed = time.time() - start\n",
+      "\n",
+      "print \"result %s found in %s seconds\" % (s, elapsed) "
+     ],
+     "language": "python",
+     "metadata": {},
+     "outputs": [
+      {
+       "output_type": "stream",
+       "stream": "stdout",
+       "text": [
+        "result 233168 found in 0.000319004058838 seconds\n"
+       ]
+      }
+     ],
+     "prompt_number": 85
+    },
+    {
+     "cell_type": "code",
+     "collapsed": false,
+     "input": [],
+     "language": "python",
+     "metadata": {},
+     "outputs": []
+    }
+   ],
+   "metadata": {}
+  }
+ ]
+}
